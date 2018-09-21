@@ -1,6 +1,12 @@
 # We_Think_Code
 Project stuff
 
+General Makefile commands:
+make: compiles.
+make clean: removes .o files.
+make fclean: clean but also removes the executables.
+make re: recompiles.
+
 Filler is a project that involves programming an AI in order to play a boardgame against another AI.
 How to run:
 make
