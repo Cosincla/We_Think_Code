@@ -1,0 +1,28 @@
+.box {
+    font-size: 1vw;
+    width: 20%;
+    height: 17%;
+    margin-left: 60%;
+    margin-top: 20%;
+    background-color: #E6EDEF;
+    border-radius: 15px;
+    padding: 5px;
+}
+.back {
+    position: absolute;
+    font-size: 1vw;
+    width: 7%;
+    height: 6%;
+    margin-left: 3%;
+    margin-top: 2%;
+    background-color: #E6EDEF;
+    border-radius: 15px;
+    padding: 4px;
+}
+.kw {
+    position: absolute;
+    margin-left: 0;
+    padding: 5px;
+    width: 50%;
+    height: 98%;
+}

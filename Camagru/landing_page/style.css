@@ -1,0 +1,55 @@
+.header {
+    width: 90%;
+    font-size: 1.5vw;
+    height: 5%;
+    margin-left: 5%;
+    background-color: #E6EDEF;
+    border-radius: 15px;
+    padding: 1px;
+}
+
+.left {
+    width: 52%;
+    font-size: 1.5vw;
+    position: absolute;
+    height: 65%;
+    margin-left: 7.25%;
+    margin-top: 6%;
+    background-color: #E6EDEF;
+    border-radius: 15px;
+    padding: 5px;
+    overflow-y: scroll;
+}
+
+.right {
+    font-size: 1.5vw;
+    width: 30%;
+    max-height: 50%;
+    margin-left: 64%;
+    margin-right: 6%;
+    margin-top: 1%;
+    background-color: #E6EDEF;
+    border-radius: 15px;
+    padding: 5px;
+    overflow-y: scroll;
+}
+
+.footer {
+    position: absolute;
+    height: 6%;
+    width: 97%;
+    overflow: hidden;
+    bottom: 0;
+}
+
+.image {
+    position: absolute;
+    margin-top: 1%;
+    margin-left: 6%;
+    border-radius: 15px;
+    height: 80px;
+    width: 55%;
+    background-color: #E6EDEF;
+    padding: 1px;
+    font-size: 1vw;
+}
