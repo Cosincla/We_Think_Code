@@ -11,10 +11,10 @@
 .back {
     position: absolute;
     font-size: 1vw;
-    width: 7%;
-    height: 6%;
+    width: 10%;
+    height: 60%;
     margin-left: 3%;
-    margin-top: 2%;
+    margin-top: 0;
     background-color: #E6EDEF;
     border-radius: 15px;
     padding: 4px;
@@ -25,4 +25,12 @@
     padding: 5px;
     width: 50%;
     height: 98%;
+}
+.footer {
+    position: absolute;
+    height: 10%;
+    width: 47%;
+    margin-left: 51%;
+    overflow: hidden;
+    bottom: 0;    
 }

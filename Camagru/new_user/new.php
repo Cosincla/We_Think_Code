@@ -9,9 +9,6 @@
 <body style="background-color: #482baf">
 <IMG class="kw" src="https://i.imgur.com/EwLh9N6.jpg">
 <div style="display: flex">
-    <div class="back">
-        <a href="http://localhost:8080/Camagru/"><p style="text-align: center">Back</p></A>
-    </div>
     <div class="box" style="flex: 50%">
         <form method="POST">
         <h3 style="text-align: center; font-family: Courier New, Courier, monospace">First:<br><input type="text" name="login"></h3>
@@ -25,5 +22,12 @@
         </form>
     </div>
 </div>
+<div class="footer">
+		<hr>
+        <div class="back">
+        <a href="http://localhost:8080/Camagru/"><p style="text-align: center">Back</p></A>
+        </div>
+		<h3 style="text-align: right">FUCK OFF</h3>
+	</div>
 </body>
 </html>
