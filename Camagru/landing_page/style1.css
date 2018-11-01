@@ -1,0 +1,59 @@
+.header {
+    width: 90%;
+    font-size: 2vw;
+    height: 7vw;
+    margin-left: 5%;
+    background-color: #E6EDEF;
+    border-radius: 15px;
+    padding: 1px;
+}
+
+.left {
+    width: 50vw;
+    font-size: 1.5vw;
+    position: absolute;
+    height: 63%;
+    margin-left: 8%;
+    margin-top: 1%;
+    background-color: #E6EDEF;
+    border-radius: 15px;
+    padding: 5px;
+    overflow-y: scroll;
+}
+
+.right {
+    text-align: center;
+    width: 30%;
+    min-height: 50%;
+    margin-left: 64%;
+    margin-right: 6%;
+    margin-top: -5.2%;
+    background-color: #E6EDEF;
+    border-radius: 15px;
+    padding: 5px;
+}
+
+.footer {
+    position: fixed;
+    height: 7%;
+    width: 97%;
+    font-size: 1vw;
+    overflow: hidden;
+    bottom: 0;
+}
+
+.image {
+    margin-top: 1%;
+    margin-left: 6%;
+    border-radius: 15px;
+    height: 5vw;
+    width: 55vw;
+    background-color: #E6EDEF;
+    padding: 1px;
+    font-size: 1.7vw;
+}
+
+#submit {
+    width: 15vw;
+    font-size: 2vw;
+}

@@ -4,20 +4,20 @@
     <meta charset="utf-8" />
     <title>Camagru</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="style3.css">
+    <link rel="stylesheet" type="text/css" href="style8.css">
 </head>
 <body>
 <div style="display: flex">
     <div class="box">
         <form method="POST">
-        <h3 style="text-align: center; font-family: Courier New, Courier, monospace">Username:<br><input type="text" name="login"></h3>
+        <h3 style="text-align: center; font-family: Courier New, Courier, monospace">New Email address:<br><input type="text" name="login"></h3>
         <input style="width: 70%; margin-left: 15%" type="submit" value="Finished?">
         </form>
     </div>
 </div>
 <div class="footer">
     <div class="back">
-        <a href="http://localhost:8080/Camagru/"><p style="text-align: center">Back</p></A>
+        <a href="http://localhost:8080/Camagru/main_page/mp.php"><p style="text-align: center">Back</p></A>
     </div>
 </div>
 </body>

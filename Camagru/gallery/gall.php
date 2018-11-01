@@ -3,12 +3,12 @@
 <head>
     <title>Camagru</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="style4.css" />
     <script src="main.js"></script>
 </head>
 <body style="background-color: #407fe5">
 <div class="header">
-    <h1 style="text-align: center"><u>THE FUCKING GALLERY</u></h1>
+    <h2 style="text-align: center"><u>Gallery</u></h2>
 </div>
 <div style="display: flex">
     <div class="left">
@@ -28,7 +28,6 @@
         <div class="back">
         <a href="http://localhost:8080/Camagru/"><p style="text-align: center">Back</p></A>
         </div>
-		<h3 style="text-align: right">FUCK OFF</h3>
 	</div>
 </body>
 </html>

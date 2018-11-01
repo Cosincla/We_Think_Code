@@ -4,30 +4,27 @@
     <meta charset="utf-8" />
     <title>Camagru</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style2.css">
 </head>
-<body style="background-color: #482baf">
-<IMG class="kw" src="https://i.imgur.com/EwLh9N6.jpg">
-<div style="display: flex">
-    <div class="box" style="flex: 50%">
+<body>
+<div>
+    <div class="box">
         <form method="POST">
-        <h3 style="text-align: center; font-family: Courier New, Courier, monospace">First:<br><input type="text" name="login"></h3>
-        <h3 style="text-align: center; font-family: Courier New, Courier, monospace">Surname:<br><input type="text" name="login"></h3>
-        <h3 style="text-align: center; font-family: Courier New, Courier, monospace">Username:<br><input type="text" name="login"></h3>
-        <h3 style="text-align: center; font-family: Courier New, Courier, monospace">Email:<br><input type="text" name="login"></h3>
-        <h3 style="text-align: center; font-family: Courier New, Courier, monospace">Backup Email:<br><input type="password" name="login"></h3>
-        <h3 style="text-align: center; font-family: Courier New, Courier, monospace">Login:<br><input type="password" name="login"></h3>
-        <h3 style="text-align: center; font-family: Courier New, Courier, monospace">Login confirmation:<br><input type="text" name="login"></h3>
-        <input style="width: 70%; margin-left: 15%" type="submit" value="ARE YOU FUCKING DONE?">
+        <h3 style="text-align: center; font-family: Courier New, Courier, monospace">First:<br><input type="text" name="first"></h3>
+        <h3 style="text-align: center; font-family: Courier New, Courier, monospace">Surname:<br><input type="text" name="surname"></h3>
+        <h3 style="text-align: center; font-family: Courier New, Courier, monospace">Username:<br><input type="text" name="username"></h3>
+        <h3 style="text-align: center; font-family: Courier New, Courier, monospace">Email:<br><input type="text" name="email"></h3>
+        <input type="checkbox" name="login"><h3 style="text-align: center; font-family: Courier New, Courier, monospace">Would you like to recieve an email when someone comments on your photos?<br></h3>
+        <h3 style="text-align: center; font-family: Courier New, Courier, monospace">Password:<br><input type="password" name="pwd"></h3>
+        <h3 style="text-align: center; font-family: Courier New, Courier, monospace">Password Confirmation:<br><input type="pwdc" name="login"></h3>
+        <input style="width: 70%; margin-left: 15%" type="submit" value="Finished?">
         </form>
     </div>
 </div>
 <div class="footer">
-		<hr>
         <div class="back">
         <a href="http://localhost:8080/Camagru/"><p style="text-align: center">Back</p></A>
         </div>
-		<h3 style="text-align: right">FUCK OFF</h3>
 	</div>
 </body>
 </html>

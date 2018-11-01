@@ -1,0 +1,79 @@
+.header {
+    width: 90%;
+    font-size: 1.5vw;
+    height: 7vw;
+    margin-left: 5%;
+    background-color: #E6EDEF;
+    border-radius: 15px;
+    padding: 1px;
+}
+
+.left {
+    width: 51vw;
+    font-size: 1.5vw;
+    height: 100vw;
+    margin-left: 7.25%;
+    margin-top: 1%;
+    background-color: #E6EDEF;
+    border-radius: 15px;
+    padding: 5px;
+}
+
+.view {
+    width: 91%;
+    font-size: 1.5vw;
+    height: 87vw;
+    margin-left: 3.25%;
+    margin-top: 1%;
+    background-color: rgb(255,255,255);
+    border-radius: 15px;
+    padding: 5px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.right {
+    font-size: 1.5vw;
+    width: 30%;
+    height: 65%;
+    max-height: 50%;
+    margin-left: 1%;
+    margin-right: 6%;
+    margin-top: 1%;
+    background-color: #E6EDEF;
+    border-radius: 15px;
+    padding: 5px;
+}
+
+.footer {
+    position: fixed;
+    height: 10%;
+    width: 97%;
+    overflow: hidden;
+    bottom: 0;
+}
+
+.image {
+    position: absolute;
+    margin-top: 1%;
+    margin-left: 6%;
+    border-radius: 15px;
+    height: 80px;
+    width: 55%;
+    background-color: #E6EDEF;
+    padding: 1px;
+    font-size: 1vw;
+}
+
+.back {
+    position: absolute;
+    font-size: 1vw;
+    width: 7vw;
+    height: 60%;
+    margin-left: 3%;
+    margin-top: 0;
+    background-color: #E6EDEF;
+    border-radius: 15px;
+    padding: 4px;
+}
