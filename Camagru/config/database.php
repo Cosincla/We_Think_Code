@@ -1,4 +1,5 @@
 <?php
-$DB_DSN = ...;
-$DB_USER = ...;
-$DB_PASSWORD = ...;
+$DB_DSN = 'mysql:dbname=cosincla_camagru;host=127.0.0.1';
+$DB_USER = root;
+$DB_PASSWORD = root;
+?>

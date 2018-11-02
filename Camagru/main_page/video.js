@@ -24,7 +24,7 @@ document.getElementById('capture').addEventListener("click", function(){
   var video = document.getElementById('video');
   context.drawImage(video, 0, 0, 320, 220);
   context.drawImage(img2, 0, 0, 320, 220);
-  context.drawImage(img1, 0, 0, 400, 300);
+  context.drawImage(img1, 0, 0, 320, 220);
 });
 
 function loadPicture(e) {

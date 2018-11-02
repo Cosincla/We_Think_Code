@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS cosincla_camagru; CREATE TABLE IF NOT EXISTS `cosincla_camagru`.`users`(
     id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     `name` VARCHAR(191) NOT NULL,
-    `surname` VARCHAR(191) NOT NULL,
+    surname VARCHAR(191) NOT NULL,
     username VARCHAR(20) UNIQUE NOT NULL,
     `password` CHAR(128) NOT NULL,
     email VARCHAR(191) UNIQUE NOT NULL,
