@@ -3,6 +3,8 @@
 require_once($_SERVER['DOCUMENT_ROOT'].'/Camagru/config/database.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/Camagru/init.php');
 
+$temp = $_GET['image'];
+$_SESSION['delete'] = $temp; 
 if (isset($_SESSION["username"])){?>
 <!doctype <!DOCTYPE html>
 <html>
@@ -10,20 +12,21 @@ if (isset($_SESSION["username"])){?>
     <meta charset="utf-8" />
     <title>Camagru</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="style8.css">
+    <link rel="stylesheet" type="text/css" href="style876.css">
 </head>
 <body>
 <div style="display: flex">
     <div class="box">
-        <form method="POST" action="emaile.php">
-        <h3 style="text-align: center; font-family: Courier New, Courier, monospace">New Email address:<br><input type="text" name="email"></h3>
-        <input style="width: 70%; margin-left: 15%" type="submit" value="Finished?">
+        <form method="POST" action="delete.php">
+        <p style="text-align: center"><u>Are you sure you would like to delete this image?</u></p>
+        <input style="width: 70%; margin-left: 15%" type="submit" value="Yes" name="yes">
+        <input style="width: 70%; margin-left: 15%" type="submit" value="No" name="no">
         </form>
     </div>
 </div>
 <div class="footer">
-    <div class="back" onclick="goBack()">
-        <script>function goBack() {window.history.back();}</script><p style="text-align: center">Back</p></A>
+    <div class="back">
+        <a href="http://localhost:8080/Camagru/main_page/mp.php"><p style="text-align: center">Back</p></A>
     </div>
 </div>
 </body>

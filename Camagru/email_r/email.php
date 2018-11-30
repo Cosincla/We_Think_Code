@@ -9,15 +9,15 @@
 <body>
 <div style="display: flex">
     <div class="box">
-        <form method="POST">
-        <h3 style="text-align: center; font-family: Courier New, Courier, monospace">Username:<br><input type="text" name="login"></h3>
+        <form method="POST" action="email_r.php">
+        <h3 style="text-align: center; font-family: Courier New, Courier, monospace">Please insert Username:<br><input type="text" name="login"></h3>
         <input style="width: 70%; margin-left: 15%" type="submit" value="Finished?">
         </form>
     </div>
 </div>
 <div class="footer">
     <div class="back">
-        <a href="http://localhost:8080/Camagru/"><p style="text-align: center">Back</p></A>
+        <a href="http://localhost:8080/Camagru/new_user/new.php"><p style="text-align: center">Back</p></A>
     </div>
 </div>
 </body>

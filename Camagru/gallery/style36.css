@@ -5,8 +5,8 @@ body {
 }
 .box {
     position: fixed;
-    height: 10%;
-    width: 20%;
+    height: 45%;
+    width: 30%;
     min-width: 20vw;
     min-height: 10%;
     margin-left: 50%;
@@ -28,7 +28,7 @@ body {
     min-width: 6vw;
     min-height: 3vw;
     margin-left: 3%;
-    bottom: 0;
+    margin-top: 0;
     background-color: #E6EDEF;
     border-radius: 15px;
     padding: 4px;

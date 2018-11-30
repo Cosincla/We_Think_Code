@@ -1,9 +1,3 @@
-.uphoto {
-    width: 70;
-    height: 50;
-    background: url(editing/new.png); 
-}
-
 .header {
     width: 90%;
     font-size: 2vw;
@@ -39,12 +33,11 @@
 }
 
 .rview {
-    width: 91%;
-    height: 20vw;
     font-size: 1.5vw;
-    margin-left: 3.25%;
-    margin-right: 3.25%;
-    margin-top: 3%;
+    height: 90%;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 2%;
     background-color: rgb(255,255,255);
     border-radius: 15px;
     padding: 5px;
@@ -53,12 +46,12 @@
 
 .right {
     font-size: 1.5vw;
-    width: 30%;
-    height: 53vw;
-    min-height: 30%;
-    margin-left: 1%;
-    margin-right: 6%;
+    height: 80%;
+    min-height: 70%;
+    margin-left: 10%;
+    margin-right: 10%;
     margin-top: 1%;
+    margin-bottom: 20%;
     background-color: #E6EDEF;
     border-radius: 15px;
     padding: 5px;
@@ -84,11 +77,11 @@
 }
 
 .back {
-    position: fixed;
-    min-width: 6vw;
-    min-height: 3vw;
+    position: absolute;
+    font-size: 1vw;
+    width: 6vw;
+    height: 3vw;
     margin-left: 3%;
-    bottom: 50%;
     background-color: #E6EDEF;
     border-radius: 15px;
     padding: 4px;
@@ -118,32 +111,6 @@
     margin-top: 100%;
     margin-left: -50%;
     font-family: 'Courier New', Courier, monospace;
-}
-.tnail {
-    position: absolute;
-    font-size: 1.5vw;
-    width: 29.5%;
-    height: 15vw;
-    min-height: 10%;
-    margin-left: 57%;
-    margin-right: 6%;
-    margin-top: 56%;
-    background-color: #E6EDEF;
-    border-radius: 15px;
-    padding: 5px;
-}
-.tview{
-    margin-left: 1%;
-    margin-right: 2%;
-    margin-top: 1%;
-    margin-bottom: 1%;
-    height: 61%;
-    width: 98%;
-    border-radius: 15px;
-    background-color: aliceblue;
-    overflow-y: hidden;
-    overflow: auto;
-    white-space: nowrap;
 }
 
 #footer {
