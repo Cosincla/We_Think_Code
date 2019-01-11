@@ -3,9 +3,9 @@
 require_once($_SERVER['DOCUMENT_ROOT'].'/Matcha/config/database.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/Matcha/init.php');
 
-if (!empty($_POST["text"]))
+if (!empty($_POST['text']))
 {
-    $text = $_POST["text"];
+    $text = htmlentities($_POST['text']);
     $user = $_SESSION["username"];
     $sql =$conn->prepare(
         "SELECT
@@ -23,22 +23,23 @@ if (!empty($_POST["text"]))
                 "UPDATE
                     `cosincla_matcha`.`profiles`
                 SET
-                    `bio` = '$text',
+                    `bio` = :text,
                     `bio_check` = 1
                 WHERE
                     `username` LIKE '$user';");
-            $sql->execute();
+            $sql->bindValue(':text', $text, PDO::PARAM_STR);
         }
         else {
             $sql = $conn->prepare(
                 "UPDATE
                     `cosincla_matcha`.`profiles`
                 SET
-                    `bio` = '$text'
+                    `bio` = :text
                 WHERE
                     `username` LIKE '$user';");
-                $sql->execute();
+            $sql->bindValue(':text', $text, PDO::PARAM_STR);
         }
+        $sql->execute();
     }
     echo '<script type=text/javascript>alert("Biography updated"); window.location="http://localhost:8080/Matcha/myprofile/my.php";</script>';
 }

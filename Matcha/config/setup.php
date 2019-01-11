@@ -97,6 +97,13 @@ try {
     );";
     $conn->exec($sql);
 
+    $sql = "CREATE TABLE IF NOT EXISTS `cosincla_matcha`.`matches`(
+        `matches` INT NOT NULL,
+        `user_1` VARCHAR(191) NOT NULL,
+        `user_2` VARCHAR(20) NOT NULL
+    );";
+    $conn->exec($sql);
+
     $sql = "CREATE TABLE IF NOT EXISTS `cosincla_matcha`.`messages`(
         sender VARCHAR(191) NOT NULL,
         reciever VARCHAR(191) NOT NULL,

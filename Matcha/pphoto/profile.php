@@ -3,7 +3,6 @@
 require_once($_SERVER['DOCUMENT_ROOT'].'/Matcha/config/database.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/Matcha/init.php');
 
-
 $target_dir = "profile_photos/";
 if(!is_dir($target_dir))
     mkdir($target_dir, 0755, true);

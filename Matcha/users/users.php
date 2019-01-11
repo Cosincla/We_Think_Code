@@ -1,7 +1,6 @@
 <?php
 
-require_once($_SERVER['DOCUMENT_ROOT'].'/Matcha/config/database.php');
-require_once($_SERVER['DOCUMENT_ROOT'].'/Matcha/init.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/Matcha/match/match.php');
 
 if (isset($_SESSION["username"])){
     $user = $_SESSION["username"];
@@ -46,8 +45,10 @@ if (isset($_SESSION["username"])){
                 <option value="http://localhost:8080/Matcha/pphoto/pphoto.php">Edit Profile Photo</option>
                 <option value="http://localhost:8080/Matcha/user_e/user_e.php">Edit Username</option>
                 <option value="http://localhost:8080/Matcha/email_e/email_e.php">Edit Email</option>
-                <option value="http://localhost:8080/Matcha/location/location.php">Location settings</option>
-                <option value="http://localhost:8080/Matcha/interest/interest.php">Interest settings</option>
+                <option value="http://localhost:8080/Matcha/location/location.php">Location Settings</option>
+                <option value="http://localhost:8080/Matcha/interest/interest.php">Interest Settings</option>
+                <option value="http://localhost:8080/Matcha/blocks/blocks.php">Block Settings</option>
+                <option value="http://localhost:8080/Matcha/filter/filter.php">Filter Settings</option>
                 <option value="http://localhost:8080/Matcha/logout.php">Logout</option>
             </select>
         </form>
@@ -57,6 +58,7 @@ if (isset($_SESSION["username"])){
     <div class="rview">
         <form method="POST">
         <?php
+        if ($s['interests'] != '0' && $s['pictures'] != '0'){
             if (isset($_GET['page'])) {
                 $page = $_GET['page'];
             } else {
@@ -67,28 +69,26 @@ if (isset($_SESSION["username"])){
     
             $sql = $conn->prepare(
                 "SELECT
-                    COUNT(`image_id`) AS 'images'
+                    COUNT(`username`) AS 'users'
                 FROM
-                    `cosincla_matcha`.`uploads`
+                    `cosincla_matcha`.`profiles`
                 WHERE
-                    `image_id` NOT LIKE 'replacement'"
+                    `bio_check` LIKE 1 AND `cover_check` LIKE 1 AND `images_check` LIKE 1 AND `username` NOT lIKE '$user';"
             );
             $sql->execute();
             $sql->setFetchMode(PDO::FETCH_ASSOC);
             $stff = $sql->fetchAll();
             foreach ($stff as $u)
-                $num = $u['images'];
+                $num = $u['users'];
             $total = ceil($num / $img);
 
 			$sql = $conn->prepare(
 			"SELECT
-				`image_id`, `image_creator`
+				`cover_image`, `username`
 			FROM
-				`cosincla_matcha`.`uploads`
+				`cosincla_matcha`.`profiles`
 			WHERE
-				`image_id` NOT LIKE 'replacement'
-			ORDER BY
-				`date_created` DESC
+                `bio_check` LIKE 1 AND `cover_check` LIKE 1 AND `images_check` LIKE 1  AND `username` NOT lIKE '$user'
             LIMIT
                 $offset, $img;");
 			$sql->execute();
@@ -96,8 +96,64 @@ if (isset($_SESSION["username"])){
 			$sql->setFetchMode(PDO::FETCH_ASSOC);
 			$stuff = $sql->fetchAll();
             foreach($stuff as $s){
-                $_POST['name'] = $s['image_creator'];
-                $lemon = $s['image_id']; ?>
+                $person = $s['username'];
+                $sql = $conn->prepare(
+                    "SELECT
+                        `block`
+                    FROM
+                        `cosincla_matcha`.`blocks`
+                    WHERE
+                        `blocker_id` LIKE '$user' AND `blocked_id` LIKE '$person';");
+                $sql->execute();
+                $sql->setFetchMode(PDO::FETCH_ASSOC);
+                $stiff = $sql->fetchAll();
+                if (!empty($stiff)){
+                    if ($stiff[0]['block'] === '1'){
+                        continue;
+                    }
+                }
+                $sql = $conn->prepare(
+                    "SELECT
+                        `gender`, `preference`
+                    FROM
+                        `cosincla_matcha`.`users`
+                    WHERE
+                        `username` LIKE '$user';");
+                $sql->execute();
+                $sql->setFetchMode(PDO::FETCH_ASSOC);
+                $stiff = $sql->fetchAll();
+                foreach ($stiff as $t){
+                    $mypref = $t['preference'];
+                    $mygen = $t['gender'];
+                }
+                $sql = $conn->prepare(
+                    "SELECT
+                        `gender`, `preference`
+                    FROM
+                        `cosincla_matcha`.`users`
+                    WHERE
+                        `username` LIKE '$person';");
+                $sql->execute();
+                $sql->setFetchMode(PDO::FETCH_ASSOC);
+                $stiff = $sql->fetchAll();
+                foreach ($stiff as $t){
+                    $pref = $t['preference'];
+                    $gen = $t['gender'];
+                }
+                if (($mypref == $gen || $mypref == "Both") && ($pref == $mygen || $pref == "Both")){
+                    $sql = $conn->prepare(
+                        "SELECT
+                            `cover_image`
+                        FROM
+                            `cosincla_matcha`.`profiles`
+                        WHERE
+                            `username` LIKE '$person';");
+                    $sql->execute();
+                    $sql->setFetchMode(PDO::FETCH_ASSOC);
+                    $stiff = $sql->fetchAll();
+                    foreach ($stiff as $t){
+                        $lemon = $t['cover_image'];
+                ?>
                 <?php echo "<a style='font-size: 1vw;
                             position: relative;
                             width: 6vw;
@@ -107,47 +163,44 @@ if (isset($_SESSION["username"])){
                             background-color: #B4B0B0;
                             border-radius: 15px;
                             padding: 4px;';
-                            href='com.php?image=$lemon'>Like/comment<a>"; ?>
+                            href='http://localhost:8080/Matcha/viewbio/vbiography.php?person=$person'>View Profile<a>"; ?>
                 <div style="margin-top: -7%;">
                     <div style="width: 100%; border-radius: 15px;">
                         <div class="profile" style="margin-top: 7%; position: relative; marginborder-radius: 250px; width: 5vw; height: 5vw; text-align: center; background-size: cover; background-repeat: no-repeat; background-position: center center;
                             <?php
-                                $name = $_POST['name'];
                                 $sql = $conn->prepare(
                                     "SELECT
                                         `id`
                                     FROM
                                         `cosincla_matcha`.`profile_photos`
                                     WHERE
-                                        `user_id` LIKE '$name' AND `selected` = 1
+                                        `user_id` LIKE '$person' AND `selected` = 1
                                     ;");
                                 $sql->execute();
-                
+            
                                 $sql->setFetchMode(PDO::FETCH_ASSOC);
                                 $stuff = $sql->fetchAll();
-                                foreach($stuff as $t){ 
-                                    $image = "/Matcha/pphoto/profile_photos/".$t['id'].".png";
-                                    $_SESSION['hidden'] = $t['id'];
+                                if (empty($stuff))
+                                    echo "background-image: url('https://i.imgur.com/3RPJcXd.png');";
+                                else{
+                                    foreach ($stuff as $s){
+                                        echo "background-image: url('http://localhost:8080/Matcha/pphoto/profile_photos/".$s['id'].".png');";
+                                    }
                                 }
-                                echo "background-image: url('".$image."');";
                             ?>">
                         </div>
-                        <img style="margin-top: -7%; width: 100%; border-radius: 15px; position absolute" src="/Matcha/main_page/uploads/<?php echo $s['image_id'].".png"; ?>">
+                        <img style="margin-top: -7%; width: 100%; border-radius: 15px; position absolute" src="/Matcha/myprofile/cover_images/upload/<?php echo $lemon.".png"; ?>">
                     </div>
                 </div>
-            <?php } ?>
         </form>
     </div>
 </div>
-<div>
-</div>
-<script src="video.js"></script>
 </body>
 <footer id="footer">
 	<p>&copy; Terms and conditions apply.<br>cosincla2018.</p>
 </footer>
 </html>
-<?php }
+<?php }}}}}
 else
     echo '<script type=text/javascript>alert("Please log in"); window.location="http://localhost:8080/Matcha/";</script>';
 ?>
