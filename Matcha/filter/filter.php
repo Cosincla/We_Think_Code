@@ -14,7 +14,7 @@ if (isset($_SESSION["username"])){?><!doctype <!DOCTYPE html>
 <body>
 <div style="display: flex">
     <div class="box">
-        <form method="POST" action="usere.php">
+        <form method="POST" action="filt.php">
         <h3 style="text-align: center; font-family: Courier New, Courier, monospace">Age:<br><input type="text" name="age" list="age"></h3>
         <datalist id="age">
                 <option value="20-24">
