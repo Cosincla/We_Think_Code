@@ -42,7 +42,12 @@ if (isset($_SESSION["username"])){?><!doctype <!DOCTYPE html>
                 <option value="0km-4km">
                 <option value="5km-9km">
                 <option value="10km-14km">
-                <option value="15km-20km">
+                <option value="15km-19km">
+                <option value="20km-24km">
+                <option value="25km-29km">
+                <option value="30km-34km">
+                <option value="35km-40km">
+                
         </datalist>
         <h3 style="text-align: center; font-family: Courier New, Courier, monospace">Simular interests:<br><input type="text" name="interests" list="ints"></h3>
         <datalist id="ints">

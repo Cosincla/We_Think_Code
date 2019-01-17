@@ -7,19 +7,6 @@ if (isset($_SESSION['username'])){
     $user = $_SESSION['username'];
     $sql = $conn->prepare(
         "SELECT
-            `matches`,
-            `user_1`,
-            `user_2`
-        FROM
-            `cosincla_matcha`.`matches`
-        WHERE
-            `user_1` LIKE '$user';");
-    $sql->execute();
-    $sql->setFetchMode(PDO::FETCH_ASSOC);
-    $stuff = $sql->fetchAll();
-    $user = $_SESSION['username'];
-    $sql = $conn->prepare(
-        "SELECT
             `interest_1`,
             `interest_2`,
             `interest_3`,

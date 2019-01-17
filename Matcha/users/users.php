@@ -1,6 +1,7 @@
 <?php
 
 require_once($_SERVER['DOCUMENT_ROOT'].'/Matcha/match/match.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/Matcha/distance/distance.php');
 
 if (isset($_SESSION["username"])){
     $user = $_SESSION["username"];
@@ -49,6 +50,7 @@ if (isset($_SESSION["username"])){
                 <option value="http://localhost:8080/Matcha/interest/interest.php">Interest Settings</option>
                 <option value="http://localhost:8080/Matcha/blocks/blocks.php">Block Settings</option>
                 <option value="http://localhost:8080/Matcha/filter/filter.php">Filter Settings</option>
+                <option value="http://localhost:8080/Matcha/visits/visits.php">View Visitors</option>
                 <option value="http://localhost:8080/Matcha/logout.php">Logout</option>
             </select>
         </form>
@@ -83,14 +85,15 @@ if (isset($_SESSION["username"])){
             $total = ceil($num / $img);
 
 			$sql = $conn->prepare(
-			"SELECT
-				`cover_image`, `username`
-			FROM
-				`cosincla_matcha`.`profiles`
-			WHERE
-                `bio_check` LIKE 1 AND `cover_check` LIKE 1 AND `images_check` LIKE 1  AND `username` NOT lIKE '$user'
-            LIMIT
-                $offset, $img;");
+                "SELECT
+                    `cover_image`,
+                    `username`
+                FROM
+                    `cosincla_matcha`.`profiles`
+                LEFT JOIN `cosincla_matcha`.`matches` ON `cosincla_matcha`.`profiles`.`username` = `cosincla_matcha`.`matches`.`user_1`
+                WHERE
+                    `bio_check` LIKE 1 AND `cover_check` LIKE 1 AND `images_check` LIKE 1 AND `username` NOT LIKE '$user'
+                ORDER BY `matches` DESC;");
 			$sql->execute();
 
 			$sql->setFetchMode(PDO::FETCH_ASSOC);
@@ -191,7 +194,11 @@ if (isset($_SESSION["username"])){
                         </div>
                         <img style="margin-top: -7%; width: 100%; border-radius: 15px; position absolute" src="/Matcha/myprofile/cover_images/upload/<?php echo $lemon.".png"; ?>">
                     </div>
-                </div>
+                </div><?php }
+                }
+            }
+        }
+    ?>
         </form>
     </div>
 </div>
@@ -200,7 +207,7 @@ if (isset($_SESSION["username"])){
 	<p>&copy; Terms and conditions apply.<br>cosincla2018.</p>
 </footer>
 </html>
-<?php }}}}}
+    <?php }
 else
     echo '<script type=text/javascript>alert("Please log in"); window.location="http://localhost:8080/Matcha/";</script>';
 ?>

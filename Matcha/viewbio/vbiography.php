@@ -7,6 +7,43 @@ if (isset($_SESSION["username"])){
     $user = $_SESSION["username"];
     $person = $_GET['person'];
 
+    $sql = $conn->prepare(
+        "SELECT
+            `visits`
+        FROM
+            `cosincla_matcha`.`visits`
+        WHERE
+            `visitor` LIKE '$user' AND `visited` LIKE '$person';");
+    $sql->execute();
+    $sql->setFetchMode(PDO::FETCH_ASSOC);
+    $stuff = $sql->fetchAll();
+    if (empty($stuff)){
+        $sql = $conn->prepare(
+            "INSERT INTO
+                `cosincla_matcha`.`visits` (`visited`, `visitor`, `visits`)
+            VALUES
+                (:p_vd, :p_vr, :p_vs);");
+        $sql->execute(array(
+            ':p_vd' => $person,
+            ':p_vr' => $user,
+            ':p_vs' => 1
+        ));
+    }
+    else {
+        foreach ($stuff as $s){
+            $old = $s['visits'];
+        }
+        $new = $old + 1;
+        $sql = $conn->prepare(
+            "UPDATE
+                `cosincla_matcha`.`visits`
+            SET
+                `visits` = '$new'
+            WHERE
+                `visitor` LIKE '$user' AND `visited` LIKE '$person';");
+        $sql->execute();
+    }
+
 ?><!doctype <!DOCTYPE html>
 <html>
 <head>
@@ -114,10 +151,12 @@ if (isset($_SESSION["username"])){
             $stuff = $sql->fetchAll();
             $total = 0;
             foreach($stuff as $s){
-                $total += $s['rating'];
+                $total = $total + $s['rating'];
             }
-            $num = $total / $rates;
-            echo "This user has an avereage rating of ".$num."/10";
+            if ($total != 0){
+                $num = round($total / $rates);
+                echo "This user has an avereage rating of ".$num."/10 from ".$rates." user(s).";
+            }
         ?></p>
         <div class="lview">
         <?php

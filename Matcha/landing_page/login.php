@@ -86,7 +86,7 @@ if (!empty($_POST["login"]) && !empty($_POST["password"])){
                 }
                 else {
                     foreach($stuff as $s){
-                        if ($s['tracker'] = 1) {
+                        if ($s['tracker'] === 1) {
                             $sql = $conn->prepare(
                                 "UPDATE
                                     `cosincla_matcha`.`location`

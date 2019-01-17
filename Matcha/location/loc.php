@@ -9,7 +9,7 @@ if (!empty($_POST["city"]) && !empty($_POST["region"]) && !empty($_POST["post"])
     $reg = $_POST["region"];
     $post = $_POST["post"];
 
-    $details = json_decode(file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$city.'%20'.$reg.'%20'.$code.'&key=AIzaSyCtF9ENBdJd3ebX3D6jUlRgbyvbwphmb3s', true));
+    $details = json_decode(file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$city.'%20'.$reg.'%20'.$post.'&key=AIzaSyBna3Dy8MvDeppDhgkEM06ddl7YJoYnAyI', true));
     $lat_1 = $details->results[0]->geometry->bounds->northeast->lat;
     $lng_1 = $details->results[0]->geometry->bounds->northeast->lng;
     $lat_2 = $details->results[0]->geometry->bounds->northeast->lat;
@@ -33,7 +33,7 @@ if (!empty($_POST["city"]) && !empty($_POST["region"]) && !empty($_POST["post"])
                 "UPDATE
                     `cosincla_matcha`.`location`
                 SET
-                    `tracker` == 0
+                    `tracker` = 0
                 WHERE
                     `user_id` LIKE '$user';");
             $sql->execute();
@@ -47,7 +47,7 @@ if (!empty($_POST["city"]) && !empty($_POST["region"]) && !empty($_POST["post"])
             `longitude` = '$long',
             `city` = '$city',
             `region` = '$reg',
-            `code` = '$code'
+            `code` = '$post'
         WHERE
             `user_id` LIKE '$user';");
     $sql->execute();

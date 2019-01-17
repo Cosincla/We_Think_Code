@@ -10,7 +10,7 @@
 <div>
     <div class="box">
         <form method="POST" action="loc.php">
-            <h3 style="text-align: center; font-family: Courier New, Courier, monospace">City:<br><input type="text" name="city"></h3>
+            <h3 style="text-align: center; font-family: Courier New, Courier, monospace">City/Town:<br><input type="text" name="city"></h3>
             <h3 style="text-align: center; font-family: Courier New, Courier, monospace">Region:<br><input type="text" name="region"></h3>
             <h3 style="text-align: center; font-family: Courier New, Courier, monospace">Postal code:<br><input type="text" name="post"></h3>
             <input style="width: 70%; margin-left: 15%" type="submit" value="Finished?">

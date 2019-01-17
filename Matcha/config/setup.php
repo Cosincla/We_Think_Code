@@ -121,7 +121,31 @@ try {
         `images_check` INT NOT NULL DEFAULT 0
     );";
     $conn->exec($sql);
+
+    $sql = "CREATE TABLE IF NOT EXISTS `cosincla_matcha`.`filters`(
+        `username` VARCHAR(191) PRIMARY KEY,
+        `age` VARCHAR(255),
+        `fame` VARCHAR(255),
+        `distance` VARCHAR(255),
+        `interests` INT
+    );";
+    $conn->exec($sql);
+
+    $sql = "CREATE TABLE IF NOT EXISTS `cosincla_matcha`.`visits`(
+        `visited` VARCHAR(255),
+        `visitor` VARCHAR(255),
+        `visits` INT
+    );";
+    $conn->exec($sql);
+
+    $sql = "CREATE TABLE IF NOT EXISTS `cosincla_matcha`.`distance`(
+        `user_1` VARCHAR(255),
+        `user_2` VARCHAR(255),
+        `distance` INT
+    );";
+    $conn->exec($sql);
 }
+
 catch(PDOexception $e) {
     echo "Connection failed: " . $e->getMessage();
 }
