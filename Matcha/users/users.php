@@ -51,6 +51,7 @@ if (isset($_SESSION["username"])){
                 <option value="http://localhost:8080/Matcha/blocks/blocks.php">Block Settings</option>
                 <option value="http://localhost:8080/Matcha/filter/filter.php">Filter Settings</option>
                 <option value="http://localhost:8080/Matcha/visits/visits.php">View Visitors</option>
+                <option value="http://localhost:8080/Matcha/chat_select/cselect.php">View Chatting options</option>
                 <option value="http://localhost:8080/Matcha/logout.php">Logout</option>
             </select>
         </form>
@@ -92,12 +93,12 @@ if (isset($_SESSION["username"])){
                     `cosincla_matcha`.`profiles`
                 LEFT JOIN `cosincla_matcha`.`matches` ON `cosincla_matcha`.`profiles`.`username` = `cosincla_matcha`.`matches`.`user_1`
                 WHERE
-                    `bio_check` LIKE 1 AND `cover_check` LIKE 1 AND `images_check` LIKE 1 AND `username` NOT LIKE '$user'
+                    `bio_check` LIKE 1 AND `cover_check` LIKE 1 AND `images_check` LIKE 1 AND `username` NOT LIKE '$user'  AND `user_2` LIKE '$user'
                 ORDER BY `matches` DESC;");
 			$sql->execute();
 
 			$sql->setFetchMode(PDO::FETCH_ASSOC);
-			$stuff = $sql->fetchAll();
+            $stuff = $sql->fetchAll();
             foreach($stuff as $s){
                 $person = $s['username'];
                 $sql = $conn->prepare(
@@ -207,7 +208,7 @@ if (isset($_SESSION["username"])){
 	<p>&copy; Terms and conditions apply.<br>cosincla2018.</p>
 </footer>
 </html>
-    <?php }
+<?php }
 else
     echo '<script type=text/javascript>alert("Please log in"); window.location="http://localhost:8080/Matcha/";</script>';
 ?>

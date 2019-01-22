@@ -24,7 +24,7 @@ if(isset($_POST["submit"])) {
             echo '<script type=text/javascript>alert("There was an error while uploading your image"); window.location="http://localhost:8080/Matcha/myprofile/cover_images/cover.php";</script>';
     }
     else
-        echo '<script type=text/javascript>alert("Image is an invalid size"); window.location="http://localhost:8080/Matcha/myprofile/cover_images/cover.php";</script>';
+        echo '<script type=text/javascript>alert("Image is an invalid size");';
 }
 else
     echo '<script type=text/javascript>alert("Input is invalid"); window.location="http://localhost:8080/Matcha/myprofile/cover_images/cover.php";</script>';

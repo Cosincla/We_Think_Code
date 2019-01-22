@@ -108,7 +108,7 @@ try {
         sender VARCHAR(191) NOT NULL,
         reciever VARCHAR(191) NOT NULL,
         `message` VARCHAR(191) NOT NULL,
-        `read` TINYINT(1) NOT NULL
+        date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
     );";
     $conn->exec($sql);
 

@@ -5,15 +5,13 @@ var img2 = new Image();
 var img3 = new Image();
 img1.src = '';
 img2.src = '';
-if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-    navigator.mediaDevices.getUserMedia({ video: true })
-      .then(
-        function(stream) {
-          video.src = window.URL.createObjectURL(stream);
-          video.play();
-        }
-      );
-}
+var player = document.getElementById("video");
+   var constrains = {
+       video: { 320: 320, 220: 220 }
+   };
+   navigator.mediaDevices.getUserMedia(constrains).then(stream => {
+       player.srcObject = stream;
+   });
 
 var canvas = document.getElementById('canvas');
 var canvas_2 = document.getElementById('canvas_2');

@@ -37,5 +37,5 @@ if (isset($_POST["sub_image"]) && !empty($_POST["sub_image"])) {
     echo '<script type=text/javascript>alert("Image successfully uploaded"); window.location="http://localhost:8080/Matcha/myprofile/my.php";</script>';
 }
 else
-    echo '<script type=text/javascript>alert("You must either take a photo or upload an image"); window.location="http://localhost:8080/Matcha/gallery/gall.php";</script>';
+    echo '<script type=text/javascript>alert("You must either take a photo or upload an image"); window.location="http://localhost:8080/Matcha/myprofile/gallery/gall.php";</script>';
 ?>
