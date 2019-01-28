@@ -4,8 +4,24 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/Matcha/config/database.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/Matcha/init.php');
 
 if (isset($_SESSION["username"])){
+    
     $user = $_SESSION["username"];
 
+    $sql = $conn->prepare(
+        "SELECT
+            `username`
+        FROM
+            `cosincla_matcha`.`profiles`
+        WHERE
+            `username` LIKE '$user';");
+    $sql->execute();
+    $sql->setFetchMode(PDO::FETCH_ASSOC);
+    $stuff = $sql->fetchAll();
+    if (empty($stuff)){
+        $sql = $conn->prepare("INSERT INTO `cosincla_matcha`.`profiles` (`username`)
+             VALUES (:p_u);");
+        $sql->execute(array(':p_u' => $user));
+    }
     $sql = $conn->prepare(
         "SELECT
             `bio_check`,
@@ -22,42 +38,35 @@ if (isset($_SESSION["username"])){
         $b = $s['bio_check'];
         $c = $s['cover_check'];
         $i = $s['images_check'];
-        if (($b === '1') && ($c === '1') && ($i === '1')){
-            $sql = $conn->prepare(
-                "UPDATE
-                    `cosincla_matcha`.`users`
-                SET
-                    `pictures` = 1
-                WHERE
-                    `username` LIKE '$user';");
-            $sql->execute();
-        }
-        if (($b === '0') || ($c === '0') || ($i === '0')) {
-            $sql = $conn->prepare(
-                "UPDATE
-                    `cosincla_matcha`.`users`
-                SET
-                    `pictures` = 0
-                WHERE
-                    `username` LIKE '$user';");
-            $sql->execute();
-        }
     }
-
-    $sql = $conn->prepare(
-        "SELECT
-            `username`
-        FROM
-            `cosincla_matcha`.`profiles`
-        WHERE
-            `username` LIKE '$user';");
-    $sql->execute();
-    $sql->setFetchMode(PDO::FETCH_ASSOC);
-    $stuff = $sql->fetchAll();
-    if (empty($stuff)){
-        $sql = $conn->prepare("INSERT INTO `cosincla_matcha`.`profiles` (`username`)
-             VALUES (:p_u);");
-        $sql->execute(array(':p_u' => $user));
+    if ($b === '0'){
+        echo '<script type=text/javascript>alert("Please add a Biography");</script>';
+    }
+    if ($c === '0'){
+        echo '<script type=text/javascript>alert("Please add a Cover Image");</script>';
+    }
+    if ($i === '0'){
+        echo '<script type=text/javascript>alert("Please add between one and five images to your gallery");</script>';
+    }
+    if (($b === '1') && ($c === '1') && ($i === '1')){
+        $sql = $conn->prepare(
+            "UPDATE
+                `cosincla_matcha`.`users`
+            SET
+                `pictures` = 1
+            WHERE
+                `username` LIKE '$user';");
+        $sql->execute();
+    }
+    if (($b === '0') || ($c === '0') || ($i === '0')) {
+        $sql = $conn->prepare(
+            "UPDATE
+                `cosincla_matcha`.`users`
+            SET
+                `pictures` = 0
+            WHERE
+                `username` LIKE '$user';");
+        $sql->execute();
     }
     ?><!doctype <!DOCTYPE html>
 <html>

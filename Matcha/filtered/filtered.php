@@ -20,7 +20,7 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/Matcha/init.php');
             $user = $_SESSION['username'];
             $sql = $conn->prepare(
             "SELECT
-                `age`, `fame`, `distance`, `interests`
+                `age`, `fame`, `distance`, `interests`, `order`
             FROM
                 `cosincla_matcha`.`filters`
             WHERE
@@ -37,6 +37,9 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/Matcha/init.php');
                 }
                 if ($s['fame'] != NULL){
                     $fame = $s['fame'];
+                    $fame = explode("-", $fame);
+                    $minfame = $fame[0];
+                    $maxfame = $fame[1];
                 }
                 if ($s['distance'] != NULL){
                     $dist = $s['distance'];
@@ -46,6 +49,12 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/Matcha/init.php');
                 }
                 if ($s['interests'] != NULL){
                     $int = $s['interests'];
+                    $int = explode("-", $int);
+                    $minint = $int[0];
+                    $maxint = $int[1];
+                }
+                if ($s['order'] != NULL){
+                    $order = $s['order'];
                 }
             }
             $sql = $conn->prepare(
@@ -62,16 +71,74 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/Matcha/init.php');
                 $mypref = $t['preference'];
                 $mygen = $t['gender'];
             }
-            $sql = $conn->prepare(
-                "SELECT
-                    `username`
-                FROM
-                    `cosincla_matcha`.`profiles`
-                WHERE
-                    `bio_check` LIKE 1 AND `cover_check` LIKE 1 AND `images_check` LIKE 1 AND `username` NOT lIKE '$user';");
-            $sql->execute();
-            $sql->setFetchMode(PDO::FETCH_ASSOC);
-            $stuff = $sql->fetchAll();
+            if ($order === "Age") {
+                $sql = $conn->prepare(
+                    "SELECT
+                        `username`
+                    FROM
+                        `cosincla_matcha`.`profiles`
+                    LEFT JOIN `cosincla_matcha`.`users` ON `cosincla_matcha`.`profiles`.`username` = `cosincla_matcha`.`users`.`username`
+                    WHERE
+                        `bio_check` LIKE 1 AND `cover_check` LIKE 1 AND `images_check` LIKE 1 AND `username` NOT lIKE '$user'
+                    ORDER BY `age` ASC;");
+                $sql->execute();
+                $sql->setFetchMode(PDO::FETCH_ASSOC);
+                $stuff = $sql->fetchAll();
+            }
+            if ($order === "Fame") {
+                $sql = $conn->prepare(
+                    "SELECT
+                        `profiles`.`username`
+                    FROM
+                        `cosincla_matcha`.`profiles`
+                    JOIN `cosincla_matcha`.`fame` ON `cosincla_matcha`.`profiles`.`username` = `cosincla_matcha`.`fame`.`username`
+                    WHERE
+                        `bio_check` LIKE 1 AND `cover_check` LIKE 1 AND `images_check` LIKE 1 AND `profiles`.`username` NOT lIKE '$user'
+                    ORDER BY `average` DESC;");
+                $sql->execute();
+                $sql->setFetchMode(PDO::FETCH_ASSOC);
+                $stuff = $sql->fetchAll();
+            }
+            if ($order === "Distance") {
+                $sql = $conn->prepare(
+                    "SELECT
+                        `username`
+                    FROM
+                        `cosincla_matcha`.`profiles`
+                    LEFT JOIN `cosincla_matcha`.`distance` ON (`cosincla_matcha`.`profiles`.`username` = `cosincla_matcha`.`distance`.`user_2` AND `user_1` LIKE '$user') 
+                    WHERE
+                        `bio_check` LIKE 1 AND `cover_check` LIKE 1 AND `images_check` LIKE 1 AND `user_2` NOT lIKE '$user'
+                    ORDER BY `distance` ASC;");
+                $sql->execute();
+                $sql->setFetchMode(PDO::FETCH_ASSOC);
+                $stuff = $sql->fetchAll();
+            }
+            if ($order === "Interests") {
+                $sql = $conn->prepare(
+                    "SELECT
+                        `username`
+                    FROM
+                        `cosincla_matcha`.`profiles`
+                    LEFT JOIN `cosincla_matcha`.`matches` ON (`cosincla_matcha`.`profiles`.`username` = `cosincla_matcha`.`matches`.`user_2` AND `user_1` LIKE '$user') 
+                    WHERE
+                        `bio_check` LIKE 1 AND `cover_check` LIKE 1 AND `images_check` LIKE 1 AND `user_2` NOT lIKE '$user'
+                    ORDER BY `matches` DESC;");
+                $sql->execute();
+                $sql->setFetchMode(PDO::FETCH_ASSOC);
+                $stuff = $sql->fetchAll();
+            }
+            else{
+                $sql = $conn->prepare(
+                    "SELECT
+                        `username`
+                    FROM
+                        `cosincla_matcha`.`profiles`
+                    WHERE
+                        `bio_check` LIKE 1 AND `cover_check` LIKE 1 AND `images_check` LIKE 1 AND `username` NOT lIKE '$user';");
+                $sql->execute();
+                $sql->setFetchMode(PDO::FETCH_ASSOC);
+                $stuff = $sql->fetchAll();
+            }
             foreach ($stuff as $s){
                 $person = $s['username'];
                 $sql = $conn->prepare(
@@ -107,7 +174,7 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/Matcha/init.php');
                             $total = $total + $rate;
                         }
                         $average = $total / $count;
-                        if ($average == $fame) {
+                        if ($average >= $minfame && $average <= $maxfame) {
                             $person = $s['username'];
                             $sql = $conn->prepare(
                             "SELECT
@@ -135,7 +202,7 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/Matcha/init.php');
                                     foreach ($stiff as $t){
                                         $mat = $t['matches'];
                                     }
-                                    if ($mat == $int){
+                                    if ($mat >= $minint && $mat <= $maxint){
                                        $sql = $conn->prepare(
                                         "SELECT
                                             `gender`, `preference`

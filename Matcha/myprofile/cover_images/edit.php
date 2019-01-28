@@ -7,7 +7,7 @@ $target_dir = "uploads/";
 if(!is_dir($target_dir))
     mkdir($target_dir, 0755, true);
 $user = $_SESSION['username'];
-if(isset($_POST["submit"])) {
+if(isset($_POST["submit"]) && ($_FILES["fileToUpload"]["tmp_name"])) {
     $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
     if($check !== false) {
         $sql = $conn->prepare("INSERT INTO `cosincla_matcha`.`uploads` (`image_creator`, `image_id`) VALUES (:p_ic, :p_iid)");                      

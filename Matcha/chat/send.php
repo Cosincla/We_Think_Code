@@ -6,7 +6,6 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/Matcha/init.php');
 if (isset($_SESSION["username"])){
     $user = $_SESSION['username'];
     $person = $_SESSION['person'];
-    echo $_SESSION['person'];
     if (!empty($_POST["text"])){
         $message = $_POST['text'];
         $sql = $conn->prepare(
@@ -18,7 +17,7 @@ if (isset($_SESSION["username"])){
             ':p_r' => $person,
             ':p_m' => $message
         ));
-        echo '<script type=text/javascript>alert("Message has been sent"); window.location="http://localhost:8080/Matcha/chat/c.php?person='.$person.'";</script>';
+        echo '<script type=text/javascript>window.location="http://localhost:8080/Matcha/chat/c.php?person='.$person.'";</script>';
     }
     else
         echo '<script type=text/javascript>alert("Please do not send empty messages"); window.location="http://localhost:8080/Matcha/chat/c.php?person='.$person.'";</script>';

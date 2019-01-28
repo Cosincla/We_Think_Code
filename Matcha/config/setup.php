@@ -127,7 +127,8 @@ try {
         `age` VARCHAR(255),
         `fame` VARCHAR(255),
         `distance` VARCHAR(255),
-        `interests` INT
+        `interests` VARCHAR(255),
+        `order` VARCHAR(255) 
     );";
     $conn->exec($sql);
 
@@ -142,6 +143,12 @@ try {
         `user_1` VARCHAR(255),
         `user_2` VARCHAR(255),
         `distance` INT
+    );";
+    $conn->exec($sql);
+
+    $sql = "CREATE TABLE IF NOT EXISTS `cosincla_matcha`.`fame`(
+        `username` VARCHAR(255) NOT NULL,
+        `average` INT NOT NULL
     );";
     $conn->exec($sql);
 }

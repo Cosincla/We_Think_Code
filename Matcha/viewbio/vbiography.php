@@ -124,8 +124,7 @@ if (isset($_SESSION["username"])){
     <div class="rbox">
         <p style="text-align: center"><u>Photos</u></p>
         <hr>
-        <p style="font-size: 0.7vw;"><?php
-            
+        <p style="font-size: 0.7vw;"><?php     
             $sql = $conn->prepare(
                 "SELECT
                     COUNT(`rating`) AS 'rates'
@@ -139,23 +138,25 @@ if (isset($_SESSION["username"])){
             foreach($stuff as $s){
                 $rates = $s['rates'];
             }
-            $sql = $conn->prepare(
-                "SELECT
-                    `rating`
-                FROM
-                    `cosincla_matcha`.`ratings`
-                WHERE
-                    `rated_id` LIKE '$person';");
-            $sql->execute();
-            $sql->setFetchMode(PDO::FETCH_ASSOC);
-            $stuff = $sql->fetchAll();
-            $total = 0;
-            foreach($stuff as $s){
-                $total = $total + $s['rating'];
-            }
-            if ($total != 0){
-                $num = round($total / $rates);
-                echo "This user has an avereage rating of ".$num."/10 from ".$rates." user(s).";
+            if ($rates != 0){
+                $sql = $conn->prepare(
+                    "SELECT
+                        `rating`
+                    FROM
+                        `cosincla_matcha`.`ratings`
+                    WHERE
+                        `rated_id` LIKE '$person';");
+                $sql->execute();
+                $sql->setFetchMode(PDO::FETCH_ASSOC);
+                $stuff = $sql->fetchAll();
+                $total = 0;
+                foreach($stuff as $s){
+                    $total = $total + $s['rating'];
+                }
+                if ($total != 0 && $rates != 0){
+                    $num = round($total / $rates);
+                    echo "This user has an avereage rating of ".$num."/10 from ".$rates." user(s).";
+                }
             }
         ?></p>
         <div class="lview">
@@ -199,9 +200,49 @@ if (isset($_SESSION["username"])){
         ?>
         </div>
     </div>
+    <div class="rrbox">
+        <p style="text-align: center"><u>Information</u></p>
+        <hr>
+        <div class="rrview">
+            <?php
+            $sql = $conn->prepare(
+                "SELECT
+                    `name`, `surname`, `age`
+                FROM
+                    `cosincla_matcha`.`users`
+                WHERE
+                    `username` LIKE '$person';");
+            $sql->execute();
+            $sql->setFetchMode(PDO::FETCH_ASSOC);
+            $stuff = $sql->fetchAll();
+            foreach ($stuff as $s){
+                $name = $s['name'];
+                $sname = $s['surname'];
+                $age = $s['age'];
+            }
+            $sql = $conn->prepare(
+                "SELECT
+                    `city`
+                FROM
+                    `cosincla_matcha`.`location`
+                WHERE
+                    `user_id` LIKE '$person';");
+            $sql->execute();
+            $sql->setFetchMode(PDO::FETCH_ASSOC);
+            $stuff = $sql->fetchAll();
+            foreach ($stuff as $s){
+                $city = $s['city'];
+            }
+            ?>
+            <p style="text-align: center">Name: <?php echo $name." ".$sname;?></u></p>
+            <p style="text-align: center">Age: <?php echo $age;?></u></p>
+            <p style="text-align: center">City: <?php echo $city;?></u></p>
+        </div>
+    </div> 
 </div>
 <div class="footer">
-<div class="back">
+<div class="footer">
+    <div class="back">
         <a href="http://localhost:8080/Matcha/users/users.php"><p style="text-align: center">Back</p></A>
     </div>
 </div>

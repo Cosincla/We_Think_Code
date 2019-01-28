@@ -60,7 +60,7 @@ if (!empty($_POST["age"]) && !empty($_POST["fame"]) && !empty($_POST["distance"]
                 "INSERT INTO
                     `cosincla_matcha`.`filters` (`age`)
                 VALUES
-                    (:p_u, :p_a);");
+                    (:p_a);");
             $sql->execute(array(':p_a' => $age));
         }
         else {
@@ -74,7 +74,7 @@ if (!empty($_POST["age"]) && !empty($_POST["fame"]) && !empty($_POST["distance"]
             $sql->execute();
         }
     }
-    if ((!empty($_POST['fame'])) && ($_POST['fame'] === "1" || $_POST['fame'] === "2" || $_POST['fame'] === "3" || $_POST['age'] === "4" || $_POST['fame'] === "5" || $_POST['fame'] === "6" || $_POST['fame'] === "7" || $_POST['fame'] === "8" || $_POST['fame'] === "9" || $_POST['fame'] === "10")){
+    if ((!empty($_POST['fame'])) && ($_POST['fame'] === "0-2" || $_POST['fame'] === "3-5" || $_POST['fame'] === "6-8" || $_POST['fame'] === "9-10")){
         $fame = $_POST['fame'];
         $sql = $conn->prepare(
             "SELECT
@@ -91,8 +91,8 @@ if (!empty($_POST["age"]) && !empty($_POST["fame"]) && !empty($_POST["distance"]
                 "INSERT INTO
                     `cosincla_matcha`.`filters` (`fame`)
                 VALUES
-                    (:p_u, :p_a);");
-            $sql->execute(array(':p_a' => $fame));
+                    (:p_f);");
+            $sql->execute(array(':p_f' => $fame));
         }
         else {
             $sql = $conn->prepare(
@@ -122,8 +122,8 @@ if (!empty($_POST["age"]) && !empty($_POST["fame"]) && !empty($_POST["distance"]
                 "INSERT INTO
                     `cosincla_matcha`.`filters` (`distance`)
                 VALUES
-                    (:p_u, :p_a);");
-            $sql->execute(array(':p_a' => $dist));
+                    (:p_d);");
+            $sql->execute(array(':p_d' => $dist));
         }
         else {
             $sql = $conn->prepare(
@@ -136,7 +136,7 @@ if (!empty($_POST["age"]) && !empty($_POST["fame"]) && !empty($_POST["distance"]
             $sql->execute();
         }
     }
-    if ((!empty($_POST['interests'])) && ($_POST['interests'] === "4" || $_POST['interests'] === "3" || $_POST['interests'] === "2" || $_POST['interests'] === "1")){
+    if ((!empty($_POST['interests'])) && ($_POST['interests'] === "1-4" || $_POST['interests'] === "2-4" || $_POST['interests'] === "3-4")){
         $interests = $_POST['interests'];
         $sql = $conn->prepare(
             "SELECT
@@ -153,8 +153,8 @@ if (!empty($_POST["age"]) && !empty($_POST["fame"]) && !empty($_POST["distance"]
                 "INSERT INTO
                     `cosincla_matcha`.`filters` (`interests`)
                 VALUES
-                    (:p_u, :p_a);");
-            $sql->execute(array(':p_a' => $interests));
+                    (:p_i);");
+            $sql->execute(array(':p_i' => $interests));
         }
         else {
             $sql = $conn->prepare(
@@ -162,6 +162,37 @@ if (!empty($_POST["age"]) && !empty($_POST["fame"]) && !empty($_POST["distance"]
                     `cosincla_matcha`.`filters`
                 SET
                     `interests` = '$interests'
+                WHERE
+                    `username` LIKE '$user';");
+            $sql->execute();
+        }
+    }
+    if ((!empty($_POST['order'])) && ($_POST['order'] === "Age" || $_POST['order'] === "Fame" || $_POST['order'] === "Distance" || $_POST['order'] === "Interests")){
+        $order = $_POST['order'];
+        $sql = $conn->prepare(
+            "SELECT
+                `order`
+            FROM
+                `cosincla_matcha`.`filters`
+            WHERE
+                `username` LIKE '$user'");
+        $sql->execute();
+        $sql->setFetchMode(PDO::FETCH_ASSOC);
+        $stuff = $sql->fetchAll();
+        if (empty($stuff)){
+            $sql = $conn->prepare(
+                "INSERT INTO
+                    `cosincla_matcha`.`filters` (`order`)
+                VALUES
+                    (:p_o);");
+            $sql->execute(array(':p_o' => $interests));
+        }
+        else {
+            $sql = $conn->prepare(
+                "UPDATE
+                    `cosincla_matcha`.`filters`
+                SET
+                    `order` = '$order'
                 WHERE
                     `username` LIKE '$user';");
             $sql->execute();

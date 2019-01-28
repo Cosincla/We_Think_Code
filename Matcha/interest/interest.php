@@ -3,8 +3,6 @@
 require_once($_SERVER['DOCUMENT_ROOT'].'/Matcha/config/database.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/Matcha/init.php');
 
-$temp = $_GET['image'];
-$_SESSION['woop'] = $temp; 
 if (isset($_SESSION["username"])){?>
 <!doctype <!DOCTYPE html>
 <html>

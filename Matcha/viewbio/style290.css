@@ -13,11 +13,33 @@
     max-width: 20vw;
     min-width: 20vw;
     height: 30vw;
-    margin-left: 55vw;
+    margin-left: 35vw;
     margin-top: 7vw;
     background-color: #E6EDEF;
     border-radius: 15px;
     padding: 5px;
+}
+.rrbox {
+    position: absolute;
+    max-width: 20vw;
+    min-width: 20vw;
+    height: 25vw;
+    margin-left: 57vw;
+    margin-top: 10vw;
+    background-color: #E6EDEF;
+    border-radius: 15px;
+    padding: 5px;
+}
+.rrview {
+    position: relative;
+    width: 94%;
+    height: 68%;
+    margin-left: 2%;
+    margin-top: -1%;
+    background-color:white;
+    border-radius: 15px;
+    padding: 5px;
+    overflow-y: scroll;
 }
 .ubox {
     position: relative;
@@ -65,7 +87,7 @@
 body {
 	background-image: url("https://i.imgur.com/ZQB5Npm.jpg");
     background-repeat: no-repeat;
-    min-height: 100%;
+    
 }
 .footer {
     position: fixed;
@@ -79,7 +101,7 @@ body {
     min-width: 5vw;
     min-height: 1vw;
     margin-left: 2%;
-    margin-top: -50;
+    margin-top: -80;
     background-color: #E6EDEF;
     border-radius: 15px;
     padding: 4px;

@@ -1,7 +1,7 @@
 <?php
 
-require_once($_SERVER['DOCUMENT_ROOT'].'/Matcha/match/match.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/Matcha/distance/distance.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/Matcha/rating/average.php');
 
 if (isset($_SESSION["username"])){
     $user = $_SESSION["username"];
@@ -18,11 +18,16 @@ if (isset($_SESSION["username"])){
         $sql->setFetchMode(PDO::FETCH_ASSOC);
         $stuff = $sql->fetchAll();
         foreach($stuff as $s) {
-            if ($s['interests'] === '0')
-                echo '<script type=text/javascript>alert("Please configure Interests");</script>';
-            if ($s['pictures'] === '0')
-                echo '<script type=text/javascript>alert("Please add Photos");</script>';
-        }?>
+            $int = $s['interests'];
+            $pic = $s['pictures'];
+        }
+        if ($int === '0')
+            echo '<script type=text/javascript>alert("Please configure Interests");</script>';
+        if ($pic === '0')
+            echo '<script type=text/javascript>alert("Please edit your Profile");</script>';
+        if ($int === '1')
+            require_once($_SERVER['DOCUMENT_ROOT'].'/Matcha/match/match.php');
+        ?>
 <!doctype <!DOCTYPE html>
 <html>
 <head>
@@ -51,6 +56,7 @@ if (isset($_SESSION["username"])){
                 <option value="http://localhost:8080/Matcha/blocks/blocks.php">Block Settings</option>
                 <option value="http://localhost:8080/Matcha/filter/filter.php">Filter Settings</option>
                 <option value="http://localhost:8080/Matcha/visits/visits.php">View Visitors</option>
+                <option value="http://localhost:8080/Matcha/viewlikes/vlikes.php">View Likes</option>
                 <option value="http://localhost:8080/Matcha/chat_select/cselect.php">View Chatting options</option>
                 <option value="http://localhost:8080/Matcha/logout.php">Logout</option>
             </select>
@@ -61,7 +67,7 @@ if (isset($_SESSION["username"])){
     <div class="rview">
         <form method="POST">
         <?php
-        if ($s['interests'] != '0' && $s['pictures'] != '0'){
+        if ($int === '1' && $pic === '1'){
             if (isset($_GET['page'])) {
                 $page = $_GET['page'];
             } else {
@@ -87,16 +93,15 @@ if (isset($_SESSION["username"])){
 
 			$sql = $conn->prepare(
                 "SELECT
-                    `cover_image`,
-                    `username`
-                FROM
-                    `cosincla_matcha`.`profiles`
-                LEFT JOIN `cosincla_matcha`.`matches` ON `cosincla_matcha`.`profiles`.`username` = `cosincla_matcha`.`matches`.`user_1`
-                WHERE
-                    `bio_check` LIKE 1 AND `cover_check` LIKE 1 AND `images_check` LIKE 1 AND `username` NOT LIKE '$user'  AND `user_2` LIKE '$user'
-                ORDER BY `matches` DESC;");
+                `cover_image`, `username`
+            FROM
+                `cosincla_matcha`.`profiles`
+            LEFT JOIN `cosincla_matcha`.`matches` ON (`cosincla_matcha`.`profiles`.`username` = `cosincla_matcha`.`matches`.`user_2` AND `user_1` LIKE '$user')
+            WHERE
+                `bio_check` LIKE 1 AND `cover_check` LIKE 1 AND `images_check` LIKE 1 AND `user_2` NOT LIKE '$user'
+            ORDER BY
+                `matches` DESC;");
 			$sql->execute();
-
 			$sql->setFetchMode(PDO::FETCH_ASSOC);
             $stuff = $sql->fetchAll();
             foreach($stuff as $s){

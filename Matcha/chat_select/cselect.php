@@ -57,8 +57,7 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/Matcha/init.php');
                             }
                             else if ($like === '1'){
                                 ?><hr><?php
-                                    echo "User: ".$person." likes your profile. ";
-                                    echo '<a href="http://localhost:8080/Matcha/chat/c.php?person='.$person.'">Send this user a message?</a>';
+                                    echo "User: ".$person." likes your profile. ".'<a href="http://localhost:8080/Matcha/chat/c.php?person='.$person.'">Send this user a message?</a>';
                                 ?><hr><?php
                             }
                         }

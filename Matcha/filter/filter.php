@@ -26,16 +26,10 @@ if (isset($_SESSION["username"])){?><!doctype <!DOCTYPE html>
         </datalist>
         <h3 style="text-align: center; font-family: Courier New, Courier, monospace">Fame:<br><input type="text" name="fame" list="fame"></h3>
         <datalist id="fame">
-                <option value="1">
-                <option value="2">
-                <option value="3">
-                <option value="4">
-                <option value="5">
-                <option value="6">
-                <option value="7">
-                <option value="8">
-                <option value="9">
-                <option value="10">
+                <option value="0-2">
+                <option value="3-5">
+                <option value="6-8">
+                <option value="9-10">
         </datalist>
         <h3 style="text-align: center; font-family: Courier New, Courier, monospace">Distance from you:<br><input type="text" name="distance" list="dist"></h3>
         <datalist id="dist">
@@ -51,10 +45,16 @@ if (isset($_SESSION["username"])){?><!doctype <!DOCTYPE html>
         </datalist>
         <h3 style="text-align: center; font-family: Courier New, Courier, monospace">Simular interests:<br><input type="text" name="interests" list="ints"></h3>
         <datalist id="ints">
-                <option value="4">
-                <option value="3">
-                <option value="2">
-                <option value="1">
+                <option value="1-4">
+                <option value="2-4">
+                <option value="3-4">
+        </datalist>
+        <h3 style="text-align: center; font-family: Courier New, Courier, monospace">Order by:<br><input type="text" name="order" list="order"></h3>
+        <datalist id="order">
+                <option value="Age">
+                <option value="Fame">
+                <option value="Distance">
+                <option value="Interests">
         </datalist>
         <input style="width: 70%; margin-left: 15%" type="submit" value="Finished?">
         </form>

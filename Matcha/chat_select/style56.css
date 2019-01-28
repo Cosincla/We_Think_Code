@@ -1,9 +1,6 @@
 body {
     background-image: url("https://i.imgur.com/ZQB5Npm.jpg");
-    background-size: 100%;
     background-repeat: no-repeat;
-    overflow-x: hidden;
-    overflow-y: hidden;
 }
 
 .header {
